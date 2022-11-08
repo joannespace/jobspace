@@ -32,9 +32,16 @@ function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    dispatch({
-      type: "LOGOUT",
-    });
+    const confirmation = window.confirm(
+      "If you log out, you can not see more job details?",
+      ""
+    );
+
+    if (confirmation) {
+      dispatch({
+        type: "LOGOUT",
+      });
+    }
   };
 
   return (

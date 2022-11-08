@@ -25,6 +25,8 @@ function LoginForm() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const state = location.state;
+
   const from = location.state?.from?.pathname || "/";
 
   const methods = useForm({ defaultValues });
@@ -36,6 +38,7 @@ function LoginForm() {
 
     auth.login(username, password, () =>
       navigate(from, {
+        state: { ...state },
         replace: true,
       })
     );
@@ -46,7 +49,7 @@ function LoginForm() {
   }
 
   return (
-    <Dialog open="true" onClose={onDismiss}>
+    <Dialog open={true} onClose={onDismiss}>
       <Stack
         spacing={3}
         alignItems="center"
