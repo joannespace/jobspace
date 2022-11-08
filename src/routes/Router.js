@@ -30,6 +30,15 @@ function Router() {
 
       {state?.backgroundLocation && (
         <Routes>
+          <Route
+            path=":jobId"
+            element={
+              <RequireAuth>
+                <JobDetails />
+              </RequireAuth>
+            }
+          />
+
           <Route path="/login" element={<LoginPage />} />
         </Routes>
       )}

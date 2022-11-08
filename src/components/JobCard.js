@@ -2,25 +2,12 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Chip, Divider, Stack } from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function JobCard({ job }) {
-  const navigate = useNavigate();
   const location = useLocation();
-  let state = location.state;
-
-  const handleClick = () => {
-    state = { backgroundLocation: location };
-    navigate(`/${job.id}`, state);
-    // location.state: { backgroundLocation: location } }
-
-    console.log("State from JobCard", state);
-  };
-
-  console.log("Location from JobCard", location);
 
   return (
     <Card
@@ -32,11 +19,10 @@ export default function JobCard({ job }) {
         minHeight: "10rem",
         textAlign: "center",
         "&:hover": {
-          boxShadow: "0 1px 1px 0px #03a9f4",
+          boxShadow: "0 1px 5px 0px grey",
         },
       }}
       style={{ border: "1px solid lightgrey" }}
-      onClick={handleClick}
     >
       <CardContent sx={{ flexGrow: 1, p: 1 }}>
         <Typography
@@ -76,15 +62,28 @@ export default function JobCard({ job }) {
           ))}
         </Stack>
 
-        <Typography fontSize="12px" sx={{ maxHeight: "4rem", mt: 0.5 }}>
+        <Typography fontSize="12px" sx={{ minHeight: "3.5rem", mt: 0.5 }}>
           {job.description.split(" ").slice(0, 10).join(" ")}...
         </Typography>
       </CardContent>
 
       <CardActions>
-        <Button variant="contained" size="small" onClick={handleClick}>
+        <Link
+          to={`/${job.id}`}
+          state={{ backgroundLocation: location }}
+          style={{
+            color: "black",
+            fontSize: "12px",
+            border: "1px solid #0A7029",
+            textDecoration: "none",
+            padding: "5px",
+            borderRadius: "5px",
+            backgroundColor: "#FEDE00",
+            boxShadow: "0 0.5px 1px 0px green",
+          }}
+        >
           Learn More
-        </Button>
+        </Link>
       </CardActions>
     </Card>
   );

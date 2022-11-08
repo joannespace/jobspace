@@ -12,7 +12,6 @@ import useAuth from "../hooks/useAuth";
 function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log("NavBar", location);
 
   const { isLoggedIn, logout, username } = useAuth();
   const handleLogOutBtn = () => {
@@ -58,13 +57,34 @@ function NavBar() {
                 <Typography variant="h10" sx={{ mr: 2 }}>
                   Welcome {username}!
                 </Typography>
-                <Button variant="contained" onClick={handleLogOutBtn}>
+                <Button
+                  variant="contained"
+                  onClick={handleLogOutBtn}
+                  sx={{
+                    color: "black",
+                    backgroundColor: "#DBE8D8",
+                    fontWeight: "bolder",
+                    "&:hover": {
+                      backgroundColor: "#FEDE00",
+                      color: "#0A7029",
+                    },
+                  }}
+                >
                   LOGOUT
                 </Button>
               </>
             ) : (
               <Button
                 variant="contained"
+                sx={{
+                  color: "black",
+                  backgroundColor: "#DBE8D8",
+                  fontWeight: "bolder",
+                  "&:hover": {
+                    backgroundColor: "#FEDE00",
+                    color: "#0A7029",
+                  },
+                }}
                 component={Link}
                 to="/login"
                 state={{ backgroundLocation: location, from: location }}
